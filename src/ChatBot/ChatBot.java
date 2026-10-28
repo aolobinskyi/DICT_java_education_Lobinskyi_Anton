@@ -28,6 +28,26 @@ public class ChatBot {
             System.out.println(numb0 + "!");
         }
 
+
+        System.out.println("Let's test your programming knowledge.");
+        System.out.println("What is 2 + 2 * 2 ?");
+        System.out.println("1. 2");
+        System.out.println("2. 5");
+        System.out.println("3. 6");
+        System.out.println("4. 8");
+
+        int answer;
+
+        do {
+            answer = scanner.nextInt();
+            if (answer != 3){
+                System.out.println("Wrong Answer. Please, try again.");
+            }
+
+        } while (answer != 3);
+
+        System.out.println("Correct.");
+        System.out.println("Goodbye, have a nice day!");
     }
 }
 
