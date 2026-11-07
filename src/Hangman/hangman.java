@@ -28,6 +28,7 @@ public class hangman {
 
         int wordNumber = random.nextInt(words.length);
         String word = words[wordNumber];
+        String guessedLetters = "";
 
         String hiddenWord = ShowWord(word);
         while (lifes > 0) {
@@ -38,7 +39,11 @@ public class hangman {
             String input = scanner.nextLine();
 
             char letter = input.charAt(0);
-
+            if (guessedLetters.contains(String.valueOf(letter))) {
+                System.out.println("No improvements");
+                lifes--;
+                continue;
+            }
             boolean found = false;
 
             char[] hiddenChars = hiddenWord.toCharArray();
@@ -48,14 +53,17 @@ public class hangman {
                 if (word.charAt(i) == letter) {
 
                     hiddenChars[i] = letter;
+
                     found = true;
                 }
             }
             hiddenWord = String.valueOf(hiddenChars);
+            guessedLetters += letter;
             if (!found) {
                 lifes--;
                 System.out.println("That letter doesn't appear in the word");
             }
+
             if (hiddenWord.equals(word)) {
                 System.out.println("You survived!");
                 return;
