@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class hangman {
+    static int lifes = 8;
 
     static String[] words = {
             "python", "java", "javascript", "kotlin"
@@ -10,9 +11,9 @@ public class hangman {
 
     public static String ShowWord(String word) {
 
-        String result = word.substring(0, 2);
+        String result = "";
 
-        for (int i = 2; i < word.length(); i++) {
+        for (int i = 0; i < word.length(); i++) {
             result += "-";
         }
 
@@ -28,14 +29,40 @@ public class hangman {
         int wordNumber = random.nextInt(words.length);
         String word = words[wordNumber];
 
-        System.out.print("Guess the word: " + ShowWord(word));
-        String userword = scanner.nextLine();
+        String hiddenWord = ShowWord(word);
+        while (lifes > 0) {
 
-        if(userword.equals(word)){
-            System.out.print("You survived!");
+            System.out.println(hiddenWord);
+
+            System.out.print("Input a letter: ");
+            String input = scanner.nextLine();
+
+            char letter = input.charAt(0);
+
+            boolean found = false;
+
+            char[] hiddenChars = hiddenWord.toCharArray();
+
+            for (int i = 0; i < word.length(); i++) {
+
+                if (word.charAt(i) == letter) {
+
+                    hiddenChars[i] = letter;
+                    found = true;
+                }
+            }
+            hiddenWord = String.valueOf(hiddenChars);
+            if (!found) {
+                lifes--;
+                System.out.println("That letter doesn't appear in the word");
+            }
+            if (hiddenWord.equals(word)) {
+                System.out.println("You survived!");
+                return;
+            }
+
         }
-        else {
-            System.out.print("You lost!");
-        }
+
+        System.out.println("You lost!");
     }
 }
