@@ -3,7 +3,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class hangman {
-    static int lifes = 8;
 
     static String[] words = {
             "python", "java", "javascript", "kotlin"
@@ -20,7 +19,8 @@ public class hangman {
         return result;
     }
 
-    public static void main(String[] args){
+    public static void startGame(){
+        int lifes = 8;
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
@@ -79,5 +79,30 @@ public class hangman {
         }
 
         System.out.println("You lost!");
+    }
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("HANGMAN");
+        while (true) {
+
+            System.out.println(
+                    "Type \"play\" to play the game, \"exit\" to quit:"
+            );
+
+            String command = scanner.nextLine();
+
+            if (command.equals("play")) {
+
+                startGame();
+
+            }
+            else if (command.equals("exit")) {
+
+                break;
+
+            }
+
+        }
     }
 }
