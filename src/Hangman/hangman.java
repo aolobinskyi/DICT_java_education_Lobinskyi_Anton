@@ -3,9 +3,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class hangman {
+
     static String[] words = {
             "python", "java", "javascript", "kotlin"
     };
+
+    public static String ShowWord(String word) {
+
+        String result = word.substring(0, 2);
+
+        for (int i = 2; i < word.length(); i++) {
+            result += "-";
+        }
+
+        return result;
+    }
 
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
@@ -16,8 +28,7 @@ public class hangman {
         int wordNumber = random.nextInt(words.length);
         String word = words[wordNumber];
 
-        System.out.print("Selected word is" + word);
-        System.out.print("Guess the word:");
+        System.out.print("Guess the word: " + ShowWord(word));
         String userword = scanner.nextLine();
 
         if(userword.equals(word)){
