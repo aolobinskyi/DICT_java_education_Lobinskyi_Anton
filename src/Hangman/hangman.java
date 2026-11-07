@@ -39,9 +39,16 @@ public class hangman {
             String input = scanner.nextLine();
 
             char letter = input.charAt(0);
+            if (letter < 'a' || letter > 'z') {
+                System.out.println("Please enter a lowercase English letter.");
+                continue;
+            }
+            if (input.length() != 1) {
+                System.out.println("You should input a single letter");
+                continue;
+            }
             if (guessedLetters.contains(String.valueOf(letter))) {
-                System.out.println("No improvements");
-                lifes--;
+                System.out.println("You`ve already guessed this letter.");
                 continue;
             }
             boolean found = false;
