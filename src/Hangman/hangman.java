@@ -1,0 +1,108 @@
+package Hangman;
+import java.util.Random;
+import java.util.Scanner;
+
+public class hangman {
+
+    static String[] words = {
+            "python", "java", "javascript", "kotlin"
+    };
+
+    public static String ShowWord(String word) {
+
+        String result = "";
+
+        for (int i = 0; i < word.length(); i++) {
+            result += "-";
+        }
+
+        return result;
+    }
+
+    public static void startGame(){
+        int lifes = 8;
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("HANGMAN");
+
+        int wordNumber = random.nextInt(words.length);
+        String word = words[wordNumber];
+        String guessedLetters = "";
+
+        String hiddenWord = ShowWord(word);
+        while (lifes > 0) {
+
+            System.out.println(hiddenWord);
+
+            System.out.print("Input a letter: ");
+            String input = scanner.nextLine();
+
+            char letter = input.charAt(0);
+            if (letter < 'a' || letter > 'z') {
+                System.out.println("Please enter a lowercase English letter.");
+                continue;
+            }
+            if (input.length() != 1) {
+                System.out.println("You should input a single letter");
+                continue;
+            }
+            if (guessedLetters.contains(String.valueOf(letter))) {
+                System.out.println("You`ve already guessed this letter.");
+                continue;
+            }
+            boolean found = false;
+
+            char[] hiddenChars = hiddenWord.toCharArray();
+
+            for (int i = 0; i < word.length(); i++) {
+
+                if (word.charAt(i) == letter) {
+
+                    hiddenChars[i] = letter;
+
+                    found = true;
+                }
+            }
+            hiddenWord = String.valueOf(hiddenChars);
+            guessedLetters += letter;
+            if (!found) {
+                lifes--;
+                System.out.println("That letter doesn't appear in the word");
+            }
+
+            if (hiddenWord.equals(word)) {
+                System.out.println("You survived!");
+                return;
+            }
+
+        }
+
+        System.out.println("You lost!");
+    }
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("HANGMAN");
+        while (true) {
+
+            System.out.println(
+                    "Type \"play\" to play the game, \"exit\" to quit:"
+            );
+
+            String command = scanner.nextLine();
+
+            if (command.equals("play")) {
+
+                startGame();
+
+            }
+            else if (command.equals("exit")) {
+
+                break;
+
+            }
+
+        }
+    }
+}
