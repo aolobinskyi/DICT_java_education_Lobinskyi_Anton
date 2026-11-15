@@ -3,11 +3,11 @@ package TicTacToe;
 import java.util.Scanner;
 
 public class TicTacToe {
+    static char currentPlayer = 'X';
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String cells = "_________";
 
-        System.out.println("Enter cells: ");
-        String cells = scanner.nextLine();
 
         printCells(cells);
         while (true){
@@ -31,10 +31,18 @@ public class TicTacToe {
             }
             int index = (row - 1) * 3 + (col - 1);
             char[] board = cells.toCharArray();
-            board[index] = 'X';
+            board[index] = currentPlayer;
             cells = String.valueOf(board);
             printCells(cells);
-            break;
+            changePlayer();
+            String gameState = getGameState(cells);
+            if (gameState.equals("X wins") ||
+                    gameState.equals("O wins") ||
+                    gameState.equals("Draw")) {
+
+                System.out.println(gameState);
+                break;
+            }
         }
 
     }
@@ -63,16 +71,6 @@ public class TicTacToe {
                 (cells.charAt(2) == charac && cells.charAt(4) == charac && cells.charAt(6) == charac);
     }
 
-    public static int countSymbol(String cells, char symbol) {
-        int count = 0;
-        for (int i = 0; i < cells.length(); i++) {
-            if (cells.charAt(i) == symbol) {
-                count++;
-            }
-        }
-        return count;
-    }
-
     public static boolean hasEmptyCells(String cells) {
         return cells.contains("_");
     }
@@ -80,15 +78,7 @@ public class TicTacToe {
     public static String getGameState(String cells) {
         boolean xWins = checkWin(cells, 'X');
         boolean oWins = checkWin(cells, 'O');
-        int xCount = countSymbol(cells, 'X');
-        int oCount = countSymbol(cells, 'O');
 
-        if (xWins && oWins) {
-            return "Impossible";
-        }
-        if (Math.abs(xCount - oCount) > 1) {
-            return "Impossible";
-        }
         if (xWins) {
             return "X wins";
         }
@@ -111,5 +101,14 @@ public class TicTacToe {
             return false;
         }
         return true;
+    }
+
+    public static void changePlayer(){
+        char player = currentPlayer;
+        if(player == 'X'){
+            currentPlayer = 'O';
+        } else{
+            currentPlayer = 'X';
+        }
     }
 }
