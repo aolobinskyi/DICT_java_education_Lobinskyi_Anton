@@ -10,7 +10,33 @@ public class TicTacToe {
         String cells = scanner.nextLine();
 
         printCells(cells);
-        System.out.println(getGameState(cells));
+        while (true){
+            int row;
+            int col;
+            System.out.println("Enter the coordinates:");
+            String input = scanner.nextLine();
+
+            String[] coordinates = input.split(" ");
+
+            try {
+                row = Integer.parseInt(coordinates[0]);
+                col = Integer.parseInt(coordinates[1]);
+            } catch (NumberFormatException e) {
+                System.out.println("You should enter numbers!");
+                continue;
+            }
+
+            if (!isValidMove(cells, row, col)) {
+                continue;
+            }
+            int index = (row - 1) * 3 + (col - 1);
+            char[] board = cells.toCharArray();
+            board[index] = 'X';
+            cells = String.valueOf(board);
+            printCells(cells);
+            break;
+        }
+
     }
 
     public static void printCells(String cells) {
@@ -73,5 +99,17 @@ public class TicTacToe {
             return "Game not finished";
         }
         return "Draw";
+    }
+    public static boolean isValidMove(String cells, int row, int col) {
+        if (row < 1 || row > 3 || col < 1 || col > 3) {
+            System.out.println("Coordinates should be from 1 to 3!");
+            return false;
+        }
+        int index = (row - 1) * 3 + (col - 1);
+        if (cells.charAt(index) != '_') {
+            System.out.println("This cell is occupied! Choose another one!");
+            return false;
+        }
+        return true;
     }
 }
