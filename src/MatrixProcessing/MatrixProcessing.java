@@ -179,6 +179,46 @@ public class MatrixProcessing {
         }
         return determinant;
     }
+    public MatrixProcessing divide(double number) {
+
+        double[][] result = new double[rows][colums];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colums; j++) {
+                result[i][j] = data[i][j] / number;
+            }
+        }
+
+        return new MatrixProcessing(result);
+    }
+    public MatrixProcessing inverse() {
+        double det = determinant();
+        if (det == 0) {
+            return null;
+        }
+        if (rows == 1) {
+            double[][] result = {{1 / data[0][0]}};
+            return new MatrixProcessing(result);
+        }
+        double[][] cofactors = new double[rows][colums];
+        for (int i = 0; i < rows; i++) {
+
+            for (int j = 0; j < colums; j++) {
+                MatrixProcessing minor = new MatrixProcessing(getMinor(i, j));
+                int sign;
+                if ((i + j) % 2 == 0) {
+                    sign = 1;
+                } else {
+                    sign = -1;
+                }
+                cofactors[i][j] = sign * minor.determinant();
+            }
+        }
+
+        MatrixProcessing result = new MatrixProcessing(cofactors);
+        result = result.transposeMainDiagonal();
+        return result.divide(det);
+    }
 
 
 

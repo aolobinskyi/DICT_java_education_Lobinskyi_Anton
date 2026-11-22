@@ -12,6 +12,7 @@ public class Main {
             System.out.println("3. Multiply matrices");
             System.out.println("4. Transpose matrix");
             System.out.println("5. Calculate a determinant");
+            System.out.println("6. Inverse matrix");
             System.out.println("0. Exit");
 
             int choose = scanner.nextInt();
@@ -105,6 +106,21 @@ public class Main {
 
                 System.out.println(firstMatrix.determinant());
 
+
+            } else if (choose == 6){
+
+                System.out.println("Enter size of matrix:");
+
+                MatrixProcessing matrix = MatrixProcessing.readMatrix(scanner);
+
+                MatrixProcessing result = matrix.inverse();
+
+                if(result == null){
+                    System.out.println("This matrix doesn't have an inverse.");
+                } else{
+                    System.out.println("The result is:");
+                    result.printMatrix();
+                }
 
             } else if (choose == 0) {
                 break;
