@@ -7,6 +7,26 @@ public class MatrixProcessing {
     private final int rows;
     private final int colums;
 
+    private double[][] getMinor(int row, int column) {
+        double[][] minor = new double[rows - 1][colums - 1];
+        int minorRow = 0;
+        for (int i = 0; i < rows; i++) {
+            if (i == row) {
+                continue;
+            }
+            int minorColumn = 0;
+            for (int j = 0; j < colums; j++) {
+                if (j == column) {
+                    continue;
+                }
+                minor[minorRow][minorColumn] = data[i][j];
+                minorColumn++;
+            }
+            minorRow++;
+        }
+        return minor;
+    }
+
     public MatrixProcessing(double[][] data){
         this.data = data;
         this.rows = data.length;
@@ -135,6 +155,32 @@ public class MatrixProcessing {
 
         return new MatrixProcessing(result);
     }
+
+    public double determinant() {
+        if (rows != colums) {
+            return 0;
+        }
+        if (rows == 1) {
+            return data[0][0];
+        }
+        if (rows == 2) {
+            return data[0][0] * data[1][1] - data[0][1] * data[1][0];
+        }
+        double determinant = 0;
+        for (int j = 0; j < colums; j++) {
+            double sign;
+            if (j % 2 == 0) {
+                sign = 1;
+            } else {
+                sign = -1;
+            }
+            MatrixProcessing minorMatrix = new MatrixProcessing(getMinor(0, j));
+            determinant += sign * data[0][j] * minorMatrix.determinant();
+        }
+        return determinant;
+    }
+
+
 
 }
 

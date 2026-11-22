@@ -11,6 +11,7 @@ public class Main {
             System.out.println("2. Multiply matrix by a constant");
             System.out.println("3. Multiply matrices");
             System.out.println("4. Transpose matrix");
+            System.out.println("5. Calculate a determinant");
             System.out.println("0. Exit");
 
             int choose = scanner.nextInt();
@@ -93,9 +94,17 @@ public class Main {
                     MatrixProcessing result = firstMatrix.transposeHorizontal();
                     result.printMatrix();
 
-                } else {
+                }  else {
                     continue;
                 }
+
+            }else if(choose == 5){
+
+                System.out.println("Enter size of matrix:");
+                MatrixProcessing firstMatrix = MatrixProcessing.readMatrix(scanner);
+
+                System.out.println(firstMatrix.determinant());
+
 
             } else if (choose == 0) {
                 break;
