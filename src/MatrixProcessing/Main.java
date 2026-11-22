@@ -10,6 +10,7 @@ public class Main {
         while (true){System.out.println("1. Add matrices");
             System.out.println("2. Multiply matrix by a constant");
             System.out.println("3. Multiply matrices");
+            System.out.println("4. Transpose matrix");
             System.out.println("0. Exit");
 
             int choose = scanner.nextInt();
@@ -52,6 +53,50 @@ public class Main {
                     System.out.println("The result is:");
                     result.printMatrix();
                 }
+            }else if (choose == 4) {
+                System.out.println("1. Main diagonal");
+                System.out.println("2. Side diagonal");
+                System.out.println("3. Vertical line");
+                System.out.println("4. Horizontal line");
+
+                int choise = scanner.nextInt();
+
+                if(choise == 1){
+
+                    System.out.println("Enter size of matrix:");
+                    MatrixProcessing firstMatrix = MatrixProcessing.readMatrix(scanner);
+
+                    MatrixProcessing result = firstMatrix.transposeMainDiagonal();
+                    result.printMatrix();
+
+                } else if(choise == 2){
+
+                    System.out.println("Enter size of matrix:");
+                    MatrixProcessing firstMatrix = MatrixProcessing.readMatrix(scanner);
+
+                    MatrixProcessing result = firstMatrix.transposeSideDiagonal();
+                    result.printMatrix();
+
+                } else if(choise == 3){
+
+                    System.out.println("Enter size of matrix:");
+                    MatrixProcessing firstMatrix = MatrixProcessing.readMatrix(scanner);
+
+                    MatrixProcessing result = firstMatrix.transposeVertical();
+                    result.printMatrix();
+
+                } else if(choise == 4){
+
+                    System.out.println("Enter size of matrix:");
+                    MatrixProcessing firstMatrix = MatrixProcessing.readMatrix(scanner);
+
+                    MatrixProcessing result = firstMatrix.transposeHorizontal();
+                    result.printMatrix();
+
+                } else {
+                    continue;
+                }
+
             } else if (choose == 0) {
                 break;
             }

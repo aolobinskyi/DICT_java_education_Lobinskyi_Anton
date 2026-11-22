@@ -85,6 +85,56 @@ public class MatrixProcessing {
 
         return new MatrixProcessing(result);
     }
+    public MatrixProcessing transposeMainDiagonal() {
+
+        double[][] result = new double[colums][rows];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colums; j++) {
+                result[j][i] = data[i][j];
+            }
+        }
+
+        return new MatrixProcessing(result);
+    }
+    public MatrixProcessing transposeSideDiagonal() {
+
+        double[][] result = new double[colums][rows];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colums; j++) {
+
+                result[colums - 1 - j][rows - 1 - i] =
+                        data[i][j];
+            }
+        }
+
+        return new MatrixProcessing(result);
+    }
+    public MatrixProcessing transposeVertical() {
+
+        double[][] result = new double[rows][colums];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colums; j++) {
+                result[i][colums - 1 - j] = data[i][j];
+            }
+        }
+
+        return new MatrixProcessing(result);
+    }
+    public MatrixProcessing transposeHorizontal() {
+
+        double[][] result = new double[rows][colums];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colums; j++) {
+                result[rows - 1 - i][j] = data[i][j];
+            }
+        }
+
+        return new MatrixProcessing(result);
+    }
 
 }
 
