@@ -54,6 +54,19 @@ public class MatrixProcessing {
         return new MatrixProcessing(data);
     }
 
+    public MatrixProcessing multiply(int multiply){
+
+        double[][] result = new double[rows][colums];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colums; j++) {
+                result[i][j] = data[i][j] * multiply;
+            }
+        }
+
+        return new MatrixProcessing(result);
+    }
+
 }
 
 

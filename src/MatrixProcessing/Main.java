@@ -10,9 +10,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         MatrixProcessing firstMatrix = MatrixProcessing.readMatrix(scanner);
-        MatrixProcessing secondMatrix = MatrixProcessing.readMatrix(scanner);
+        int multiply = scanner.nextInt();
 
-        MatrixProcessing result = firstMatrix.add(secondMatrix);
+        MatrixProcessing result = firstMatrix.multiply(multiply);
 
         if (result == null) {
             System.out.println("ERROR");
